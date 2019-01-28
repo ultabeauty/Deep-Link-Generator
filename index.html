@@ -34,10 +34,10 @@
 
             #test_button { padding:5px 15px; background:#fff; color: #ff0064; font-weight: bold; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px; border: 2px solid #ff0064; height: 44px; width:  100%; font-size: 17px; text-transform: uppercase; margin-top:  16px; }
             #test_button:hover { background:#ff99ad; }
-            
+
             #changelog { margin-top:  100px; }
             #changelog textarea { display:  block; width:  100%; height: auto; }
-            
+
             #changelog ul { margin-bottom:  24px; padding-left: 16px }
             #changelog ul li { font-size: 12px; padding-bottom: 4px; padding-top: 4px; border-bottom: 1px solid silver; }
 
@@ -78,20 +78,20 @@
                 { display : '----------------------------------------------- Dynamic -----------------------------------------------', type : 3 },
                 { display : 'Web', name : 'page=web', fields : [ { value : 'url', required : true, hint : 'Must be https. Should include ?source=native' }, { value : 'title', required : false }], type : 2 },
                 { display : 'PDP', name : 'page=pdp', fields : [ { value : 'productid', required : true }, { value : 'skuid', required : false }], type : 2 },
-                { display : 'PLP - Brand Listing Page', name : 'page=plp', fields : [ { value : 'type', initial : 'brand', required : true }, { value : 'value', required : true, hint : 'xlsImp52300002' }, { value : 'title', required : false }, { value : 'sort', required : false, hint : 'use " " for relevance, other options: bestSellers, topRated, isNew, minSkuUltaPrice, maxSkuUltaPrice'}], type : 2 },
+                { display : 'PLP - Brand Listing Page', name : 'page=plp', fields : [ { value : 'type', initial : 'brand', required : true }, { value : 'value', required : true, hint : '9719' }, { value : 'title', required : false }, { value : 'sort', required : false, hint : 'use " " for relevance, other options: bestSellers, topRated, isNew, minSkuUltaPrice, maxSkuUltaPrice'}], type : 2 },
                 { display : 'PLP - N Value', name : 'page=plp', fields : [ { value : 'type', initial : 'n', required : true }, { value : 'value', required : true, hint : '1z12lx1Z26y1' }, { value : 'title', required : false }, { value : 'sort', required : false, hint : 'use " " for relevance, other options: bestSellers, topRated, isNew, minSkuUltaPrice, maxSkuUltaPrice' }], type : 2 },
                 { display : 'PLP - Promotion', name : 'page=plp', fields : [ { value : 'type', initial : 'promotion', required : true }, { value : 'value', required : true, hint : '0000143832' }, { value : 'title', required : false }, { value : 'sort', required : false, hint : 'use " " for relevance, other options: bestSellers, topRated, isNew, minSkuUltaPrice, maxSkuUltaPrice' }], type : 2 },
                 { display : 'PLP - Keyword / Featured', name : 'page=plp', fields : [ { value : 'type', initial : 'keyword', required : true }, { value : 'value', required : true, hint : 'benefithoolawk36 or Pink Lipstick' }, { value : 'title', required : false }, { value : 'sort', required : false, hint : 'use " " for relevance, other options: bestSellers, topRated, isNew, minSkuUltaPrice, maxSkuUltaPrice' } ], type : 2 }
 
-            ]; 
+            ];
 
-            
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
+
             function populateDeepLinks()
             {
 
@@ -108,22 +108,22 @@
                     document.getElementById('page').appendChild(opt);
                 }
 
-     
+
                 //Check for App Param
-                document.getElementById('test_button').disabled = true;  
+                document.getElementById('test_button').disabled = true;
             }
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
 
             function pageSelected()
             {
                 document.getElementById('parameters').innerHTML = '';
 
-                var index = event.target.selectedIndex - 1;            
+                var index = event.target.selectedIndex - 1;
 
                 var deeplink = deeplinks[index];
                 var deeplink_fields = deeplink.fields;
@@ -145,7 +145,7 @@
                     opt.name = deeplink_field.value;
                     opt.value = (deeplink_field.initial) ? deeplink_field.initial : '';
                     opt.disabled = (deeplink_field.initial) ? true : false;
-                    opt.required = deeplink_field.required; 
+                    opt.required = deeplink_field.required;
                     opt.placeholder = (deeplink_field.required) ? 'Required' : 'Optional';
 
                     /*
@@ -157,8 +157,8 @@
 
                     document.getElementById('parameters').appendChild(opt);
                 }
-                
-                
+
+
                      //Manually Add the TID Field
                     var x = document.createElement("LABEL");
                     x.innerHTML = "tid (Tracking ID)"
@@ -172,23 +172,23 @@
                     opt.disabled = false;
                     opt.required = false;
                     opt.placeholder = "Optional";
-                
+
                     document.getElementById('parameters').appendChild(opt);
                     //End
-                
-                
+
+
 
                 document.getElementById('helptext').style.display = 'block';
                 document.getElementById('generate_button').disabled = false;
-                document.getElementById('test_button').disabled = false;  
+                document.getElementById('test_button').disabled = false;
             }
 
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
             function generateDeepLink()
             {
                 var base = 'ulta://go?';
@@ -216,7 +216,7 @@
                         if(inputNode.value.length > 0)
                         {
                             if(append.length > 0) { append += '&'; }
-                            append += inputNode.name + '=' + encodeURIComponent(inputNode.value); 
+                            append += inputNode.name + '=' + encodeURIComponent(inputNode.value);
                         }
                     }
                     else if(inputNode.name == 'value')
@@ -224,7 +224,7 @@
                         if(inputNode.value.length > 0)
                         {
                             if(append.length > 0) { append += '&'; }
-                            append += inputNode.name + '=' + encodeURIComponent(inputNode.value); 
+                            append += inputNode.name + '=' + encodeURIComponent(inputNode.value);
                         }
                     }
                     else if(inputNode.name == 'title')
@@ -232,7 +232,7 @@
                         if(inputNode.value.length > 0)
                         {
                             if(append.length > 0) { append += '&'; }
-                            append += inputNode.name + '=' + encodeURIComponent(inputNode.value); 
+                            append += inputNode.name + '=' + encodeURIComponent(inputNode.value);
                         }
 
                     }
@@ -243,7 +243,7 @@
                             if(append.length > 0) { append += '&'; }
                             append += inputNode.name + '=' + inputNode.value;
                         }
-                    }                
+                    }
                 }
 
                 if(append.length > 0)
@@ -257,22 +257,22 @@
 
             }
 
-            
-            
+
+
 
             function showDeepLink()
             {
                 var deep_link = generateDeepLink();
-                
+
                 if(deep_link)
                     {
-                prompt('',deep_link);                        
+                prompt('',deep_link);
                     }
             }
 
 
-            
-            
+
+
             function testDeepLink()
             {
                 var deep_link = generateDeepLink();
@@ -280,9 +280,9 @@
             }
 
 
-            
-            
-            
+
+
+
             function validateURL()
             {
                 var parameters = document.getElementById('parameters');
@@ -294,15 +294,15 @@
                     var inputNode = inputs[i];
 
                     if(inputNode.name == 'url')
-                    {     
-                        
+                    {
+
                         var pattern = new RegExp('^(https?:\\/\\/)?'+ // protocol
   '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.?)+[a-z]{2,}|'+ // domain name
   '((\\d{1,3}\\.){3}\\d{1,3}))'+ // OR ip (v4) address
   '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // port and path
   '(\\?[;&a-z\\d%_.~+=-]*)?'+ // query string
   '(\\#[-a-z\\d_]*)?$','i'); // fragment locator
-                        
+
                         if(!pattern.test(inputNode.value))
                         {
                             alert("not a url");
@@ -321,7 +321,7 @@
             <h1>Native App - Deeplink Generator</h1>
             <select name="deeplinks" onchange="pageSelected()" id="page">
                 <option value="" disabled selected>Select your option</option>
-            </select>    
+            </select>
             <hr>
 
             <h1>Parameters</h1>
@@ -335,18 +335,18 @@
             <div id="changelog">
                 <h2>Changelog:</h2>
             <textarea rows="20" readonly>Updated: 04/16/18
-• Added URL encoding of value input (mostly needed for keyword search with multiple words) 
-                
-Updated: 03/15/18 
-• Added 'tid' param to dynamic deeplinks for omniture tracking 
-                
+• Added URL encoding of value input (mostly needed for keyword search with multiple words)
+
+Updated: 03/15/18
+• Added 'tid' param to dynamic deeplinks for omniture tracking
+
 Updated: 11/20/17
-• Removed the https check as we are using http for holiday to avoid cache issues 
-                
-Updated: 11/14/17 
-• Added support for left navigation root category linking, 5.2+ only 
-• Fixed title encoding for all words, before only worked if two word title 
-• Made 'Test Deep Link' button visible for everyone 
+• Removed the https check as we are using http for holiday to avoid cache issues
+
+Updated: 11/14/17
+• Added support for left navigation root category linking, 5.2+ only
+• Fixed title encoding for all words, before only worked if two word title
+• Made 'Test Deep Link' button visible for everyone
 • titles now use true urlecoding %20 over +
                 </textarea>
             </div>
