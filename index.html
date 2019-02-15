@@ -77,7 +77,7 @@
                 { display : 'Virtual Beauty', name : 'page=virtual_beauty', fields : [ ], type : 1 },
                 { display : '----------------------------------------------- Dynamic -----------------------------------------------', type : 3 },
                 { display : 'Web', name : 'page=web', fields : [ { value : 'url', required : true, hint : 'Must be https. Should include ?source=native' }, { value : 'title', required : false }], type : 2 },
-                { display : 'PDP', name : 'page=pdp', fields : [ { value : 'productid', required : true }, { value : 'skuid', required : false }], type : 2 },
+                { display : 'PDP', name : 'page=pdp', fields : [ { value : 'productid', required : true, hint : 'pimprod2003852' }, { value : 'skuid', required : false }], type : 2 },
                 { display : 'PLP - Brand Listing Page', name : 'page=plp', fields : [ { value : 'type', initial : 'brand', required : true }, { value : 'value', required : true, hint : '9719' }, { value : 'title', required : false }, { value : 'sort', required : false, hint : 'use " " for relevance, other options: bestSellers, topRated, isNew, minSkuUltaPrice, maxSkuUltaPrice'}], type : 2 },
                 { display : 'PLP - N Value', name : 'page=plp', fields : [ { value : 'type', initial : 'n', required : true }, { value : 'value', required : true, hint : '1z12lx1Z26y1' }, { value : 'title', required : false }, { value : 'sort', required : false, hint : 'use " " for relevance, other options: bestSellers, topRated, isNew, minSkuUltaPrice, maxSkuUltaPrice' }], type : 2 },
                 { display : 'PLP - Promotion', name : 'page=plp', fields : [ { value : 'type', initial : 'promotion', required : true }, { value : 'value', required : true, hint : '0000143832' }, { value : 'title', required : false }, { value : 'sort', required : false, hint : 'use " " for relevance, other options: bestSellers, topRated, isNew, minSkuUltaPrice, maxSkuUltaPrice' }], type : 2 },
@@ -330,11 +330,15 @@
             <hr>
 
             <input type="submit" onclick="showDeepLink()" value="Show Deep Link" id="generate_button" disabled>
-            <input type="submit" onclick="testDeepLink()" value="Test Deep Link *" id="test_button">
+            <input type="submit" onclick="testDeepLink()" value="Test Deep Link (on Phone only) *" id="test_button">
             <p>* If you're using Chrome the test button may not work due to Chrome not allowing JS redirects, please use show deep link button, copy the deeplink, and then paste in your URL bar.</p>
             <div id="changelog">
                 <h2>Changelog:</h2>
-            <textarea rows="20" readonly>Updated: 04/16/18
+            <textarea rows="20" readonly>
+Updated: 02/15/19
+• Fixes for email marketing team clarity
+
+Updated: 04/16/18
 • Added URL encoding of value input (mostly needed for keyword search with multiple words)
 
 Updated: 03/15/18
