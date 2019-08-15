@@ -1,50 +1,49 @@
 <!DOCTYPE html>
 <html>
 
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Native App Deep Link Generator</title>
-        <meta name="description" content="App Intercept / Deep Link Tester">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Native App Deep Link Generator</title>
+  <meta name="description" content="App Intercept / Deep Link Tester">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
-        <style>
+  <style>
 
-            html { background: #f2f2f2; }
+    html { background: #f2f2f2; }
             * { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif; color: #303030; font-size: 15px;  }
-
             h1 { font-size: 22px; color: #303030; }
             h2 { font-size: 17px; color: #303030; font-weight: 600; display: inline-block }
             h3 { font-size: 15px; color: #303030; font-weight: 400; display: inline-block; font-size: 16px; }
             h4 { font-size: 13px; display: inline-block }
             h5 { font-size: 12px; display: inline-block; color: gray; }
-
             input { width: 75%; height: 28px; margin-bottom:  8px; }
-
             select { width: 50%; margin-bottom: 8px; }
-
             label { display: block; margin-bottom:  8px; }
 
+            .button { padding:5px 15px; font-weight: bold; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px; height: 44px; width:  100%; font-size: 17px; text-transform: uppercase; margin-top:  16px; }
+            .primary { background:#ff0064; color: #fff; margin-bottom: 0px;}
+            .primary:hover { background:#ff99ad; }
+            .primary:active { background:#ff99ad; }
+            .primary:disabled { background: #666; opacity: .3; }
+            .secondary {background:#fff; color: #ff0064; border: 3px solid #ff0064; margin-bottom: 24px; }
+            .secondary:hover { background:#ff99ad; }
+            .secondary:active { background:#ff99ad; }
+            .secondary:disabled { background: #666; opacity: .3; border: none; color: #fff;}
+
+
             #content { padding: 16px; }
-
             #helptext { display:  none; }
-
-            #generate_button { padding:5px 15px; background:#ff0064; color: #fff; font-weight: bold; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px; height: 44px; width:  100%; font-size: 17px; text-transform: uppercase; margin-top:  16px; }
-            #generate_button:hover { background:#ff99ad; }
-
-            #test_button { padding:5px 15px; background:#fff; color: #ff0064; font-weight: bold; border:0 none; cursor:pointer; -webkit-border-radius: 5px; border-radius: 5px; border: 2px solid #ff0064; height: 44px; width:  100%; font-size: 17px; text-transform: uppercase; margin-top:  16px; }
-            #test_button:hover { background:#ff99ad; }
 
             #changelog { margin-top:  100px; }
             #changelog textarea { display:  block; width:  100%; height: auto; }
-
             #changelog ul { margin-bottom:  24px; padding-left: 16px }
             #changelog ul li { font-size: 12px; padding-bottom: 4px; padding-top: 4px; border-bottom: 1px solid silver; }
 
         </style>
-        <script>
+  <script>
 
-            var deeplinks = [
+    var deeplinks = [
                 { display : '----------------------------------------------- Tabs -----------------------------------------------', type : 3 },
                 { display : 'Home', name : 'tab=home', fields : [ ], type : 0 },
                 { display : 'Favorites', name : 'tab=favorites', fields : [ ], type : 0 },
@@ -111,6 +110,7 @@
 
                 //Check for App Param
                 document.getElementById('test_button').disabled = true;
+                document.getElementById('test_button_2').disabled = true;
             }
 
 
@@ -180,7 +180,9 @@
 
                 document.getElementById('helptext').style.display = 'block';
                 document.getElementById('generate_button').disabled = false;
+                document.getElementById('generate_button_2').disabled = false;
                 document.getElementById('test_button').disabled = false;
+                document.getElementById('test_button_2').disabled = false;
             }
 
 
@@ -270,13 +272,42 @@
                     }
             }
 
+            function showSmartLink()
+            {
+              var person = prompt("Where should this smart link fallback to if the app isn't installed? Use cancel to default to ulta.com.");
+              var deep_link = generateDeepLink();
+              var smart_link = "https://www.ulta.com/innovation/utility/redirect.html?deeplink=";
 
-
+              if (person != null)
+              {
+                prompt('',smart_link + encodeURIComponent(deep_link) + "&fallback=" + encodeURIComponent(person));
+              }
+              else
+              {
+                prompt('',smart_link + encodeURIComponent(deep_link));
+              }
+            }
 
             function testDeepLink()
             {
                 var deep_link = generateDeepLink();
                 window.location.href = deep_link;
+            }
+
+            function testSmartLink()
+            {
+              var person = prompt("Where should this smart link fallback to if the app isn't installed? Use cancel to default to ulta.com.");
+              var deep_link = generateDeepLink();
+              var smart_link = "https://www.ulta.com/innovation/utility/redirect.html?deeplink=";
+
+              if (person != null)
+              {
+                window.location.href = smart_link + encodeURIComponent(deep_link) + "&fallback=" + encodeURIComponent(person);
+              }
+              else
+              {
+                window.location.href = smart_link + encodeURIComponent(deep_link);
+              }
             }
 
 
@@ -314,27 +345,37 @@
 
         </script>
 
-    </head>
-    <body onload='populateDeepLinks()'>
+</head>
 
-        <div id="content">
-            <h1>Native App - Deeplink Generator</h1>
-            <select name="deeplinks" onchange="pageSelected()" id="page">
-                <option value="" disabled selected>Select your option</option>
-            </select>
-            <hr>
+<body onload='populateDeepLinks()'>
 
-            <h1>Parameters</h1>
-            <div id="parameters"><h3>Select a page above to get started.</h3></div>
-            <h5 id="helptext">• I will URLEncode the url for you<br>• I will encode the title for you<br>• I will encode keywords and category names for you</h5>
-            <hr>
+  <div id="content">
+    <h1>Native App - Deeplink Generator</h1>
+    <select name="deeplinks" onchange="pageSelected()" id="page">
+      <option value="" disabled selected>Select your option</option>
+    </select>
+    <hr>
 
-            <input type="submit" onclick="showDeepLink()" value="Show Deep Link" id="generate_button" disabled>
-            <input type="submit" onclick="testDeepLink()" value="Test Deep Link (on Phone only) *" id="test_button">
-            <p>* If you're using Chrome the test button may not work due to Chrome not allowing JS redirects, please use show deep link button, copy the deeplink, and then paste in your URL bar.</p>
-            <div id="changelog">
-                <h2>Changelog:</h2>
-            <textarea rows="20" readonly>
+    <h1>Parameters</h1>
+    <div id="parameters">
+      <h3>Select a page above to get started.</h3>
+    </div>
+    <h5 id="helptext">• I will URLEncode the url for you<br>• I will encode the title for you<br>• I will encode keywords and category names for you</h5>
+    <hr>
+
+    <input type="submit" onclick="showDeepLink()" value="Show Deep Link" class="button primary" id="generate_button" disabled>
+    <input type="submit" onclick="testDeepLink()" value="Test Deep Link (on Phone only) *"  class="button secondary" id="test_button">
+
+    <input type="submit" onclick="showSmartLink()" value="Show Smart Link" id="generate_button_2" class="button primary" disabled>
+    <input type="submit" onclick="testSmartLink()" value="Test Smart Link (on Phone only) *" class="button secondary" id="test_button_2">
+
+    <p>* If you're using Chrome the test button may not work due to Chrome not allowing JS redirects, please use show deep link button, copy the deeplink, and then paste in your URL bar.</p>
+    <div id="changelog">
+      <h2>Changelog:</h2>
+      <textarea rows="20" readonly>
+Updated: 08/15/19
+• Added smart link buttons for email team
+
 Updated: 05/13/19
 • Added a link to brand ID page (make sure you're on Ulta network)
 
@@ -356,9 +397,10 @@ Updated: 11/14/17
 • Made 'Test Deep Link' button visible for everyone
 • titles now use true urlecoding %20 over +
                 </textarea>
-            </div>
-        </div>
+    </div>
+  </div>
 
 
-    </body>
+</body>
+
 </html>
